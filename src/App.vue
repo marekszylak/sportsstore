@@ -14,9 +14,13 @@ export default {
   },
   created() {
     this.getData()
+    this.initializeCart(this.$store)
   },
   methods: {
-    ...mapActions(["getData"])
+    ...mapActions({
+      getData: "getData",
+      initializeCart: "cart/initializeCart"
+    })
   }
 }
 </script>
