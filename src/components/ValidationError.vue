@@ -24,7 +24,8 @@ export default {
 	}, 
 	methods: {
 		hasValidationError(type) {
-			return this.validation.$params.hasOwnProperty(type) && !this.validation[type];
+			// return this.validation.$params.hasOwnProperty(type) && !this.validation[type];
+			return Object.prototype.hasOwnProperty.call(this.validation.$params, type) && !this.validation[type];
 		} 
 	}
 } 

@@ -47,8 +47,9 @@
           <router-link to="/" class="btn btn-secondary m-1">
             Kontynuuj zakupy
           </router-link>
-          <router-link to="/checkout" class="btn btn-primary m-1"
-                       v-bind:disabled="lines.length == 0">
+          <router-link to="/checkout" v-bind:disabled="lines.length == 0"
+                       class="btn btn-primary m-1"
+                       >
             Do kasy
           </router-link>
         </div>
