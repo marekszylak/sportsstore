@@ -31,7 +31,7 @@ export default new Vuex.Store({
     // productsTotal: 0,
     currentPage: 1,
     pageSize: 4,
-    currentCategory: 'Wszystkie'
+    currentCategory: "Wszystkie"
   },
   getters: {
     // productsFilteredByCategory: state => state.products.filter( p => state.currentCategory == 'Wszystkie' ||
@@ -66,7 +66,7 @@ export default new Vuex.Store({
     // }
     addPage(state, page) {
       for (let i = 0; i < page.pageCount; i++) {
-        Vue.set(state.pages, page.number + 1, 
+        Vue.set(state.pages, page.number + i, 
                 page.data.slice(i * state.pageSize, 
                 (i * state.pageSize) + state.pageSize))
       }
@@ -92,7 +92,7 @@ export default new Vuex.Store({
     async getPage(context, getPageCount = 1) {
       let url = `${productsUrl}?_page=${context.state.currentPage}`
               + `&_limit=${context.state.pageSize * getPageCount}`
-      if (context.state.currentCategory != 'Wszystkie') {
+      if (context.state.currentCategory != "Wszystkie") {
         url += `&category=${context.state.currentCategory}`
       }
       let response = await Axios.get(url)
@@ -110,12 +110,12 @@ export default new Vuex.Store({
     setPageSize(context, size) {
       context.commit("clearPages")
       context.commit("_setPageSize", size)
-      context.commit("getPage", 2)
+      context.dispatch("getPage", 2)
     },
     setCurrentCategory(context, category) {
       context.commit("clearPages")
       context.commit("_setCurrentCategory", category)
-      context.commit("getPage", 2)
+      context.dispatch("getPage", 2)
     }
   }
 })
