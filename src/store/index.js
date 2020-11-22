@@ -31,7 +31,9 @@ export default new Vuex.Store({
     // productsTotal: 0,
     currentPage: 1,
     pageSize: 4,
-    currentCategory: "Wszystkie"
+    currentCategory: "Wszystkie",
+    searchTerm: '',
+    showSearch: false
   },
   getters: {
     // productsFilteredByCategory: state => state.products.filter( p => state.currentCategory == 'Wszystkie' ||
@@ -79,6 +81,13 @@ export default new Vuex.Store({
     },
     setPageCount(state, count) {
       state.serverPageCount = Math.ceil(Number(count) / state.pageSize)
+    },
+    setShowSearch(state, show) {
+      state.showSearch = show
+    },
+    setSearchTerm(state, term) {
+      state.searchTerm = term
+      state.currentPage = 1
     }
   },
   actions: {
@@ -94,6 +103,9 @@ export default new Vuex.Store({
               + `&_limit=${context.state.pageSize * getPageCount}`
       if (context.state.currentCategory != "Wszystkie") {
         url += `&category=${context.state.currentCategory}`
+      }
+      if (context.state.searchTerm != "") {
+        url += `&q=${context.state.searchTerm}`
       }
       let response = await Axios.get(url)
       context.commit("setPageCount", response.headers['x-total-count'])
@@ -115,6 +127,16 @@ export default new Vuex.Store({
     setCurrentCategory(context, category) {
       context.commit("clearPages")
       context.commit("_setCurrentCategory", category)
+      context.dispatch("getPage", 2)
+    },
+    search(context, term) {
+      context.commit("setSearchTerm", term)
+      context.commit("clearPages")
+      context.dispatch("getPage", 2)
+    },
+    clearSearchTerm(context) {
+      context.commit("setSearchTerm", '')
+      context.commit("clearPages")
       context.dispatch("getPage", 2)
     }
   }
