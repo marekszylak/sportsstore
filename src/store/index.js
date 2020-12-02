@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import Axios from "axios";
 import CartModule from "./cart";
 import OrdersModule from "./orders";
+import AuthModule from "./auth";
 Vue.use(Vuex);
 // const testData = [];
 // for (let i = 1; i <= 10; i++) {
@@ -18,7 +19,8 @@ export default new Vuex.Store({
   strict: true,
   modules: {
     cart: CartModule,
-    orders: OrdersModule 
+    orders: OrdersModule,
+    auth: AuthModule
   },
   state: {
     // products: testData,
