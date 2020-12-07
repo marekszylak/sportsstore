@@ -6,6 +6,8 @@ import Checkout from "../components/Checkout";
 import OrderThanks from "../components/OrderThanks";
 import Authentication from "../components/admin/Authentication";
 import Admin from "../components/admin/Admin";
+import ProductAdmin from "../components/admin/ProductAdmin";
+import OrderAdmin from "../components/admin/OrderAdmin";
 import dataStore from "../store"
 Vue.use(VueRouter);
 
@@ -24,7 +26,13 @@ export default new VueRouter({
         } else {
           next("/login")
         }
-      }},
+      },
+      children: [
+        { path: "products", component: ProductAdmin },
+        { path: "orders", component: OrderAdmin },
+        { path: "", redirect: "/admin/products" }
+      ]
+    },
     { path: "*", redirect: "/" }
   ]
 })

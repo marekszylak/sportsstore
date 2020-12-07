@@ -1,5 +1,5 @@
 <template>
-  <div class="m-2">
+	<div class="m-2">
 		<h4 class="bg-primary text-white text-center p-2">
 			Panel administracyjny sklepu sportowego
 		</h4>
@@ -12,7 +12,7 @@
 			<validation-error v-bind:validation="$v.username" />
 		</div>
 		<div class="form-group">
-			<label>Hasł<option value=""></option></label>
+			<label>Hasło</label>
 			<input type="password" class="form-control" v-model="$v.password.$model">
 			<validation-error v-bind:validation="$v.password" />
 		</div>

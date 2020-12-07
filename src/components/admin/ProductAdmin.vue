@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-danger text-white text-center h4 p-2">
+	<div class="bg-danger text-white text-center h4 p-2">
 		Zarządzanie produktami
 	</div>
 </template>
